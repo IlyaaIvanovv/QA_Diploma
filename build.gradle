@@ -11,6 +11,7 @@ compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -26,4 +27,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'sut.url', System.getProperty('sut.url', "http://localhost:8080")
+    systemProperty 'db.url', System.getProperty('db.url')
+    systemProperty 'db.login', System.getProperty('db.login', "app")
+    systemProperty 'db.password', System.getProperty('db.password', "pass")
 }
