@@ -29,7 +29,7 @@ public class PaymentCreditCardTest {
     @BeforeEach
     void setUp() {
         open(System.getProperty("sut.url"));
-        offerPage.openPaymentByCard();
+        offerPage.openPaymentByCredit();
     }
 
     @AfterEach
@@ -38,22 +38,12 @@ public class PaymentCreditCardTest {
     }
 
     @Test
-    public void regularPurchaseOfATourUsingAnActiveCard() {
+    public void regularPurchaseOfATourOnCreditUsingAnActiveCard() {
         val cardInfo = getFullValidCardWithApprovedStatus();
         paymentPage.setCardInfo(cardInfo);
         paymentPage.messageSuccess();
         val expectedStatus = "APPROVED";
-        val actualStatus = SQLData.getStatusLastPaymentTransaction();
-        assertEquals(expectedStatus, actualStatus);
-    }
-
-    @Test
-    public void regularPurchaseOfATourUsingAnInactiveCard() {
-        val cardInfo = getFullValidCardWithDeclinedStatus();
-        paymentPage.setCardInfo(cardInfo);
-        paymentPage.messageError();
-        val expectedStatus = "DECLINED";
-        val actualStatus = SQLData.getStatusLastPaymentTransaction();
+        val actualStatus = SQLData.getStatusLastCreditTransaction();
         assertEquals(expectedStatus, actualStatus);
     }
 }
