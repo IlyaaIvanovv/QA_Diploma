@@ -29,7 +29,7 @@ public class PaymentCreditCardTest {
     @BeforeEach
     void setUp() {
         open(System.getProperty("sut.url"));
-        offerPage.openPaymentByCredit();
+        paymentPage.openPaymentByCredit();
     }
 
     @AfterEach

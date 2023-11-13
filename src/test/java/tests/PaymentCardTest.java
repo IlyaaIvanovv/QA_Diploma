@@ -5,7 +5,6 @@ import data.SQLData;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
 import org.junit.jupiter.api.*;
-import pages.OfferPage;
 import pages.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -13,7 +12,6 @@ import static data.DataHelper.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentCardTest {
-    OfferPage offerPage = new OfferPage();
     PaymentPage paymentPage = new PaymentPage();
 
     @BeforeAll
@@ -29,7 +27,7 @@ public class PaymentCardTest {
     @BeforeEach
     void setUp() {
         open(System.getProperty("sut.url"));
-        offerPage.openPaymentByCard();
+        paymentPage.openPaymentByCard();
     }
 
     @AfterEach
@@ -56,4 +54,36 @@ public class PaymentCardTest {
         val actualStatus = SQLData.getStatusLastPaymentTransaction();
         assertEquals(expectedStatus, actualStatus);
     }
+
+    //Валидация полей:
+    //Номер карты
+    @Test
+    public void errorInvalidFormatInTheCardNumberWith1() {
+        val cardInfo = getCardInfoWith1InCardNumber();
+        paymentPage.setCardInfo(cardInfo);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    @Test
+    public void errorInvalidFormatInTheCardNumberWith15() {
+        val cardInfo = getCardInfoWith15InCardNumber();
+        paymentPage.setCardInfo(cardInfo);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    @Test
+    public void errorInvalidFormatInTheCardNumberWith16Zero() {
+        val cardInfo = getCardInfoWith16ZeroInCardNumber();
+        paymentPage.setCardInfo(cardInfo);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    @Test
+    public void errorInvalidFormatInTheCardNumberWithEmpty() {
+        val cardInfo = getCardInfoWithEmptyCardNumber();
+        paymentPage.setCardInfo(cardInfo);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    //Месяц
 }
