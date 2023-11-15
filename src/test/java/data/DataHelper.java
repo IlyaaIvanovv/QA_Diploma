@@ -1,10 +1,26 @@
 package data;
 
+import com.github.javafaker.Faker;
 import lombok.NoArgsConstructor;
 import lombok.Value;
+import java.util.Locale;
 
 @NoArgsConstructor
 public class DataHelper {
+
+    public static String generateCardHolderName(String locale) {
+        Locale localeEn = new Locale("en");
+        Faker faker = new Faker(localeEn);
+        String cardHolderName = faker.name().fullName();
+        return cardHolderName;
+    }
+
+    public static String generateCVV(String locale) {
+        Locale localeEn = new Locale("en");
+        Faker faker = new Faker(localeEn);
+        String CVV = faker.
+    }
+
     @Value
     public static class CardInfo {
         String cardNumber;
