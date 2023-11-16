@@ -8,7 +8,6 @@ import org.junit.jupiter.api.*;
 import pages.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static data.DataHelper.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentCardTest {

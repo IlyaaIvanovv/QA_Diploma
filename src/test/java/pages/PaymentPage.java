@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import data.DataHelper;
 
 import java.time.Duration;
 
@@ -30,12 +29,12 @@ public class PaymentPage {
     private final SelenideElement fieldCVC = $$(".input__control")
             .find(exactText("CVC/CVV"));
 
-    public void setCardInfo (DataHelper.CardInfo cardInfo) {
-        fieldCardNumber.setValue(cardInfo.getCardNumber());
-        fieldMonth.setValue(cardInfo.getCardMonth());
-        fieldYear.setValue(cardInfo.getCardYear());
-        fieldCardHolderName.setValue(cardInfo.getCardHolder());
-        fieldCVC.setValue(cardInfo.getCardCVV());
+    public void setCardInfo (String cardNumber, String month, String year, String cardHolderName, String CVC) {
+        fieldCardNumber.setValue(cardNumber);
+        fieldMonth.setValue(month);
+        fieldYear.setValue(year);
+        fieldCardHolderName.setValue(cardHolderName);
+        fieldCVC.setValue(CVC);
     }
 
     public void openPaymentByCard() {
