@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import data.DataHelper;
 import data.SQLData;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
@@ -9,12 +10,11 @@ import pages.OfferPage;
 import pages.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static data.DataHelper.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentCreditCardTest {
-    OfferPage offerPage = new OfferPage();
-    PaymentPage paymentPage = new PaymentPage();
+    private OfferPage offerPage;
+    private PaymentPage paymentPage;
 
     @BeforeAll
     static void addReport () {
@@ -39,10 +39,14 @@ public class PaymentCreditCardTest {
 
     @Test
     public void regularPurchaseOfATourOnCreditUsingAnActiveCard() {
-        val cardInfo = getFullValidCardWithApprovedStatus();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageSuccess();
-        val expectedStatus = "APPROVED";
+        val expectedStatus = DataHelper.getApprovedStatus();
         val actualStatus = SQLData.getStatusLastCreditTransaction();
         assertEquals(expectedStatus, actualStatus);
     }

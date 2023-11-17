@@ -1,17 +1,20 @@
 package tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import data.DataHelper;
 import data.SQLData;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
 import org.junit.jupiter.api.*;
+import pages.OfferPage;
 import pages.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentCardTest {
-    PaymentPage paymentPage = new PaymentPage();
+    private OfferPage offerPage;
+    private PaymentPage paymentPage;
 
     @BeforeAll
     static void addReport () {
@@ -36,53 +39,77 @@ public class PaymentCardTest {
 
     @Test
     public void regularPurchaseOfATourUsingAnActiveCard() {
-        val cardInfo = getFullValidCardWithApprovedStatus();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageSuccess();
-        val expectedStatus = "APPROVED";
+        val expectedStatus = DataHelper.getApprovedStatus();
         val actualStatus = SQLData.getStatusLastPaymentTransaction();
         assertEquals(expectedStatus, actualStatus);
     }
 
     @Test
     public void regularPurchaseOfATourUsingAnInactiveCard() {
-        val cardInfo = getFullValidCardWithDeclinedStatus();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getValidCardNumberWithDeclinedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageError();
-        val expectedStatus = "DECLINED";
+        val expectedStatus = DataHelper.getDeclinedStatus();
         val actualStatus = SQLData.getStatusLastPaymentTransaction();
         assertEquals(expectedStatus, actualStatus);
     }
 
-    //Валидация полей:
-    //Номер карты
+    //Validation field:
+    //Card Number
     @Test
     public void errorInvalidFormatInTheCardNumberWith1() {
-        val cardInfo = getCardInfoWith1InCardNumber();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getCardNumberFrom1Digit("en");
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageIncorrectFormat();
     }
 
     @Test
     public void errorInvalidFormatInTheCardNumberWith15() {
-        val cardInfo = getCardInfoWith15InCardNumber();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getCardNumberFrom15Digit("en");
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageIncorrectFormat();
     }
 
     @Test
     public void errorInvalidFormatInTheCardNumberWith16Zero() {
-        val cardInfo = getCardInfoWith16ZeroInCardNumber();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getCardNumberFrom16Zero();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageIncorrectFormat();
     }
 
     @Test
     public void errorInvalidFormatInTheCardNumberWithEmpty() {
-        val cardInfo = getCardInfoWithEmptyCardNumber();
-        paymentPage.setCardInfo(cardInfo);
+        val cardNumber = DataHelper.getEmptyCardNumber();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
         paymentPage.messageIncorrectFormat();
     }
 
-    //Месяц
+    //Month
 }

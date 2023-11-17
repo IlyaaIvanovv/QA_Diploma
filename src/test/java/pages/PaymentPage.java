@@ -17,6 +17,8 @@ public class PaymentPage {
             .find(exactText("Купить"));
     private final SelenideElement buttonCredit = $$(".button__content")
             .find(exactText("Купить в кредит"));
+    private final SelenideElement buttonContinue = $$(".button__content")
+            .find(exactText("Продолжить"));
 
     private final SelenideElement fieldCardNumber = $$(".input__control")
             .find(exactText("Номер карты"));
@@ -35,6 +37,7 @@ public class PaymentPage {
         fieldYear.setValue(year);
         fieldCardHolderName.setValue(cardHolderName);
         fieldCVC.setValue(CVC);
+        buttonContinue.click();
     }
 
     public void openPaymentByCard() {
@@ -47,11 +50,7 @@ public class PaymentPage {
         paymentByCredit.shouldBe(visible);
     }
 
-    private final SelenideElement buttonContinue = $$(".button__content")
-            .find(exactText("Продолжить"));
-    public void pushButtonContinue() {
-        buttonContinue.click();
-    }
+
 
     private final SelenideElement success = $$(".notification__title")
             .find(exactText("Операция одобрена"));
