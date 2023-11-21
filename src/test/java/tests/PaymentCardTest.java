@@ -17,7 +17,7 @@ public class PaymentCardTest {
     private PaymentPage paymentPage;
 
     @BeforeAll
-    static void addReport () {
+    static void addReport() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
@@ -28,8 +28,8 @@ public class PaymentCardTest {
 
     @BeforeEach
     void setUp() {
-        open(System.getProperty("sut.url"));
-        paymentPage.openPaymentByCard();
+        offerPage = open(System.getProperty("sut.url"), OfferPage.class);
+        paymentPage = offerPage.buyByCard();
     }
 
     @AfterEach

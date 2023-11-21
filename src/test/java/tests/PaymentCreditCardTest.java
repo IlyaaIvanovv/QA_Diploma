@@ -28,8 +28,8 @@ public class PaymentCreditCardTest {
 
     @BeforeEach
     void setUp() {
-        open(System.getProperty("sut.url"));
-        paymentPage.openPaymentByCredit();
+        offerPage = open(System.getProperty("sut.url"), OfferPage.class);
+        paymentPage = offerPage.buyByCreditCard();
     }
 
     @AfterEach

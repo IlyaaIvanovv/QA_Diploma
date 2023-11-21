@@ -2,7 +2,6 @@ package data;
 
 import lombok.val;
 import models.CreditRequestModel;
-import models.OrderModel;
 import models.PaymentModel;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -52,60 +51,12 @@ public class SQLData {
         return null;
     }
 
-    public static String getTransactionId() {
-        val selectTransactionId = "SELECT * FROM payment_entity";
-        val runner = new QueryRunner();
-        try (val conn = getConnection()) {
-            val transactionId = runner.query(conn, selectTransactionId, new BeanHandler<>(PaymentModel.class));
-            return transactionId.getTransaction_id();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static String getPaymentId() {
-        val selectPaymentId = "SELECT * FROM order_entity";
-        val runner = new QueryRunner();
-        try (val conn = getConnection()) {
-            val paymentId = runner.query(conn, selectPaymentId, new BeanHandler<>(OrderModel.class));
-            return paymentId.getPayment_id();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static String getCreditId() {
-        val selectCreditId = "SELECT * FROM order_entity";
-        val runner = new QueryRunner();
-        try (val conn = getConnection()) {
-            val creditId = runner.query(conn, selectCreditId, new BeanHandler<>(OrderModel.class));
-            return creditId.getCredit_id();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public static String getStatusLastCreditTransaction() {
         val selectStatus = "SELECT * FROM credit_request_entity";
         val runner = new QueryRunner();
         try (val conn = getConnection()) {
             val cardStatus = runner.query(conn, selectStatus, new BeanHandler<>(CreditRequestModel.class));
             return cardStatus.getStatus();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static String getBankId() {
-        val selectBankId = "SELECT * FROM credit_request_entity";
-        val runner = new QueryRunner();
-        try (val conn = getConnection()) {
-            val bankId = runner.query(conn, selectBankId, new BeanHandler<>(CreditRequestModel.class));
-            return bankId.getBank_id();
         } catch (SQLException e) {
             e.printStackTrace();
         }
