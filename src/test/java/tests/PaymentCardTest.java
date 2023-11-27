@@ -135,14 +135,14 @@ public class PaymentCardTest {
     }
 
     @Test
-    public void errorIncorrectIndicatedCardDateInTheMonthWith2Zero() {
+    public void errorIncorrectFormatCardDateInTheMonthWith2Zero() {
         val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
         val month = DataHelper.getMonthFrom2Zero();
         val year = DataHelper.getValidYear();
         val cardHolderName = DataHelper.getValidCardHolderName("en");
         val CVC = DataHelper.getValidCVC("en");
         paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
-        paymentPage.messageIncorrectIndicatedCardDate();
+        paymentPage.messageIncorrectFormat();
     }
 
     @Test
