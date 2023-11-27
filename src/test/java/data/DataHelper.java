@@ -52,8 +52,7 @@ public class DataHelper {
 
     // Month:
     public static String getValidMonth() {
-        String validMonth = LocalDate.now()
-                .format(DateTimeFormatter.ofPattern("MM"));
+        String validMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
         return validMonth;
     }
 
@@ -73,8 +72,7 @@ public class DataHelper {
     }
 
     public static String getMonthOver12() {
-        String monthOver12 = LocalDate.now().plusMonths(12)
-                .format(DateTimeFormatter.ofPattern("MM"));
+        String monthOver12 = LocalDate.now().plusMonths(20).format(DateTimeFormatter.ofPattern("MM"));
         return monthOver12;
     }
 
@@ -97,14 +95,12 @@ public class DataHelper {
     }
 
     public static String getPastYear() {
-        String pastYear = LocalDate.now().minusYears(1)
-                .format(DateTimeFormatter.ofPattern("yy"));
+        String pastYear = LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy"));
         return pastYear;
     }
 
     public static String getFutureYear() {
-        String futureYear = LocalDate.now().plusYears(6)
-                .format(DateTimeFormatter.ofPattern("yy"));
+        String futureYear = LocalDate.now().plusYears(6).format(DateTimeFormatter.ofPattern("yy"));
         return futureYear;
     }
 

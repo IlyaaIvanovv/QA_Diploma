@@ -112,4 +112,160 @@ public class PaymentCardTest {
     }
 
     //Month
+    @Test
+    public void errorInvalidFormatInTheMonthWith1() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getMonthFrom1Digit("en");
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    @Test
+    public void errorIncorrectIndicatedCardDateInTheMonthWithOver12() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getMonthOver12();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectIndicatedCardDate();
+    }
+
+    @Test
+    public void errorIncorrectIndicatedCardDateInTheMonthWith2Zero() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getMonthFrom2Zero();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectIndicatedCardDate();
+    }
+
+    @Test
+    public void errorInvalidFormatInTheMonthWithEmpty() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getEmptyMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    //Year
+    @Test
+    public void errorInvalidFormatInTheYearWith1() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getYearFrom1Digit("en");
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    @Test
+    public void errorCardHasExpiredInTheYearWithPastYear() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getPastYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageCardHasExpired();
+    }
+
+    @Test
+    public void errorIncorrectIndicatedCardDateInTheYearWithFutureYear() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getFutureYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectIndicatedCardDate();
+    }
+
+    @Test
+    public void errorInvalidFormatInTheYearWithEmpty() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getEmptyYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    //CardHolder Name
+    @Test
+    public void errorConsistsOfLettersInTheCardHolderWithDigits() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getCardHolderNameFullNumbers("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageConsistsOfLetters();
+    }
+
+    @Test
+    public void errorConsistsOfLettersInTheCardHolderWithSpecialCharacters() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getCardHolderNameFromSpecialCharacters();
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageConsistsOfLetters();
+    }
+
+    @Test
+    public void errorRequiredFieldInTheCardHolderWithSpaces() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getCardHolderNameFromSpaces();
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageRequiredField();
+    }
+
+    @Test
+    public void errorRequiredFieldInTheCardHolderWithEmpty() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getEmptyCardHolderName();
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageRequiredField();
+    }
+
+    //CVC/CVV
+    @Test
+    public void errorInvalidFormatInTheCVCWith1() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getCVCFrom1Digit("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectFormat();
+    }
+
+    @Test
+    public void errorInvalidFormatInTheCVCWithEmpty() {
+        val cardNumber = DataHelper.getValidCardNumberWithApprovedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getEmptyCVC();
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageIncorrectFormat();
+    }
 }

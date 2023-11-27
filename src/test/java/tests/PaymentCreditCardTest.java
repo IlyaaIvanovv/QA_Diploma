@@ -50,4 +50,21 @@ public class PaymentCreditCardTest {
         val actualStatus = SQLData.getStatusLastCreditTransaction();
         assertEquals(expectedStatus, actualStatus);
     }
+
+    @Test
+    public void regularPurchaseOfATourOnCreditUsingAnInactiveCard() {
+        val cardNumber = DataHelper.getValidCardNumberWithDeclinedStatus();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val cardHolderName = DataHelper.getValidCardHolderName("en");
+        val CVC = DataHelper.getValidCVC("en");
+        paymentPage.setCardInfo(cardNumber, month, year, cardHolderName, CVC);
+        paymentPage.messageError();
+        val expectedStatus = DataHelper.getDeclinedStatus();
+        val actualStatus = SQLData.getStatusLastCreditTransaction();
+        assertEquals(expectedStatus, actualStatus);
+    }
+
+    //Validation field:
+    //Card Number
 }

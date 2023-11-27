@@ -5,7 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selectors.byText;
 
 public class PaymentPage {
 
@@ -40,43 +42,43 @@ public class PaymentPage {
         paymentByCredit.shouldBe(visible);
     }
 
-    private final SelenideElement success = $$(".notification__title").find(exactText("Операция одобрена"));
+    private final SelenideElement success = $(byText("Операция одобрена Банком."));
 
     public void messageSuccess() {
         success.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    private final SelenideElement error = $$(".notification__title").find(exactText("Ошибка!"));
+    private final SelenideElement error = $(byText("Ошибка! Банк отказал в проведении операции."));
 
     public void messageError() {
         error.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    private final SelenideElement incorrectFormat = $$(".input__sub").find(exactText("Неверный формат"));
+    private final SelenideElement incorrectFormat = $(byText("Неверный формат"));
 
     public void messageIncorrectFormat() {
         incorrectFormat.shouldBe(visible);
     }
 
-    private final SelenideElement requiredField = $$(".input__sub").find(exactText("Поле обязательно для заполнения"));
+    private final SelenideElement requiredField = $(byText("Поле обязательно для заполнения"));
 
     public void messageRequiredField() {
         requiredField.shouldBe(visible);
     }
 
-    private final SelenideElement incorrectIndicatedCardDate = $$(".input__sub").find(exactText("Неверно указан срок действия карты"));
+    private final SelenideElement incorrectIndicatedCardDate = $(byText("Неверно указан срок действия карты"));
 
     public void messageIncorrectIndicatedCardDate() {
         incorrectIndicatedCardDate.shouldBe(visible);
     }
 
-    private final SelenideElement cardHasExpired = $$(".input__sub").find(exactText("Истёк срок действия карты"));
+    private final SelenideElement cardHasExpired = $(byText("Истёк срок действия карты"));
 
     public void messageCardHasExpired() {
         cardHasExpired.shouldBe(visible);
     }
 
-    private final SelenideElement consistsOfLetters = $$(".input__sub").find(exactText("Должно состоять из букв"));
+    private final SelenideElement consistsOfLetters = $(byText("Должно состоять из букв"));
 
     public void messageConsistsOfLetters() {
         consistsOfLetters.shouldBe(visible);
