@@ -18,14 +18,14 @@
 ### Результаты выполнения автотестов:
 #### При подключении к СУБД MySQL
 
-https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/screenshots/AllureMySQL.png
+![](https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/screenshots/AllureMySQL.png)
 
 - 15 - успешных тест-кейсов, что составляет 75%
 - 5 - не успешных тест-кейсов, что составляет 25%
 
 #### При подключении к СУБД PostgreSQL
 
-https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/screenshots/AllurePostgreSQL.png
+![](https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/screenshots/AllurePostgreSQL.png)
 
 - 15 - успешных тест-кейсов, что составляет 75%
 - 5 - не успешных тест-кейсов, что составляет 25%
