@@ -4,7 +4,7 @@
 
 [План автоматизации тестирования](https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/docs/Plan.md).\
 [Отчёт по итогам тестирования](https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/docs/Report.md).\
-[Отчёт по итогам автоматизации]().
+[Отчёт по итогам автоматизации](https://github.com/IlyaaIvanovv/QA_Diploma/blob/main/docs/Summary.md).
 
 ## Начало работы
 
